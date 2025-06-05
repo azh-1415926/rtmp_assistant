@@ -30,6 +30,14 @@ class Config
             if (!file.is_open())
             {
                 std::cerr << "无法打开配置文件: " << config_file << std::endl;
+
+                Config config;
+                config.display_filter = "tcp port 1935";
+                config.interface_name = "Realtek Gaming 2.5GbE Family Controller";
+                config.obs_path = "";
+                config.obs_config_path = "";
+
+                return config;
             }
 
             nlohmann::json data;

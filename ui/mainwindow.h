@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "rtmp.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -19,6 +21,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    rtmp* _rtmp;
+    QList<QString> interface_names;
+    QList<QString> interface_descriptions;
 
     void init();
 };

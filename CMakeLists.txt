@@ -12,7 +12,10 @@ include_directories(${3rd_Library}/.. ${3rd_Library}/include)
 link_directories(${3rd_Library}/lib)
 
 add_library(get_rtmp rtmp.h rtmp.cpp)
+target_include_directories(get_rtmp PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_link_libraries(get_rtmp PUBLIC iphlpapi wpcap)
+
 add_executable(douyin_rtmp_assistant main.cpp)
-target_link_libraries(douyin_rtmp_assistant get_rtmp iphlpapi wpcap)
+target_link_libraries(douyin_rtmp_assistant get_rtmp)
 
 add_subdirectory(ui)
