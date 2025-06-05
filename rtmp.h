@@ -27,9 +27,9 @@ class Config
         static Config read_config(const std::string& config_file)
         {
             std::ifstream file(config_file);
-            if (!file.is_open()) {
+            if (!file.is_open())
+            {
                 std::cerr << "无法打开配置文件: " << config_file << std::endl;
-                exit(1);
             }
 
             nlohmann::json data;
@@ -61,3 +61,54 @@ void extract_server_and_code(pcap_t* handle, std::string& server, std::string& c
 void modify_obs_config(const std::string& file_path, const std::string& server, const std::string& code);
 // 启动OBS
 void start_obs(const std::string& path);
+
+class rtmp
+{
+    public:
+        Config config;
+        std::vector<std::pair<std::string, std::string>> interfaces_name;
+        std::string server, code;
+
+        rtmp(const std::string& cfg_path="config.json")
+        {
+            config = Config::read_config(cfg_path);
+            interfaces_name=get_network_interfaces();
+        }
+
+        bool getByInterface(const std::string& interface_name)
+        {
+            // 打开网络接口
+            char errbuf[PCAP_ERRBUF_SIZE];
+            pcap_t *handle = pcap_open_live(interface_name.c_str(), 65536, 1, 1000, errbuf);
+            if (handle == nullptr)
+            {
+                std::cerr << "无法打开设备 " << interface_name << ": " << errbuf << std::endl;
+                return false;
+            }
+
+            // 设置BPF过滤器
+            struct bpf_program fp;
+            if (pcap_compile(handle, &fp, config.display_filter.c_str(), 0, 0xffffffff) == -1)
+            {
+                std::cerr << "无法解析过滤器: " << pcap_geterr(handle) << std::endl;
+                pcap_close(handle);
+                return false;
+            }
+
+            if (pcap_setfilter(handle, &fp) == -1)
+            {
+                std::cerr << "无法安装过滤器: " << pcap_geterr(handle) << std::endl;
+                pcap_close(handle);
+                return false;
+            }
+
+            extract_server_and_code(handle, server, code);
+            pcap_close(handle);
+
+            return true;
+        }
+
+        Config getConfig() { return config; }
+        std::string getServer() { return server; }
+        std::string getCode() { return code; }
+};

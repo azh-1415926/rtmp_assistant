@@ -1,6 +1,6 @@
 #include "rtmp.h"
 
-int main()
+int test_main()
 {
     system("chcp 65001");
     // 读取配置
@@ -45,6 +45,43 @@ int main()
     std::string server, code;
     extract_server_and_code(handle, server, code);
     pcap_close(handle);
+
+    if (!server.empty() && !code.empty())
+    {
+        std::cout << "服务器地址: " << server << std::endl;
+        std::cout << "推流码: " << code << std::endl;
+
+        // 修改OBS配置并启动
+        if (!config.obs_config_path.empty())
+        {
+            modify_obs_config(config.obs_config_path, server, code);
+        }
+
+        if (!config.obs_path.empty())
+        {
+            start_obs(config.obs_path);
+        }
+    }
+    else
+    {
+        std::cerr << "未能成功提取服务器地址和推流码" << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+
+int main()
+{
+    system("chcp 65001");
+    
+    rtmp r("config.json");
+
+    r.getByInterface("\\Device\\NPF_{FAE0ED12-DAE9-410F-9C41-A198DB8D1EF9}");
+
+    Config config=r.getConfig();
+    std::string server=r.getServer();
+    std::string code=r.getCode();
 
     if (!server.empty() && !code.empty())
     {
