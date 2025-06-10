@@ -18,6 +18,7 @@ public:
     int timeout;
 
     void run() override;
+    void setTimeout(int t) { timeout=t; }
 
 signals:
     void sendServerInfo(const QString&,const QString&);

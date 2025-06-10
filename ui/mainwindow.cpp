@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , _rtmp(new rtmp())
     , rtmp_thread(nullptr)
+    , flagOfStop(0)
 {
     ui->setupUi(this);
 
@@ -33,6 +34,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
+    QStringList listOfTime;
+    for(int i=0;i<20;i++)
+    {
+        listOfTime<<QString::number((i+1)*5);
+    }
+    // 添加监听时间
+    ui->timeOfRTMP->addItems(listOfTime);
+    ui->timeOfRTMP->setCurrentIndex(1);
+
     // 获取所有网卡
     auto interface_list=_rtmp->interfaces_name;
 
@@ -60,13 +70,22 @@ void MainWindow::init()
         }
 
         // 创建子线程
-        rtmp_thread= new get_rtmp(flagOfStop,10);
+        rtmp_thread= new get_rtmp(flagOfStop,ui->timeOfRTMP->currentText().toInt());
         rtmp_thread->interface_name=interface_name;
 
         // 将子线程 sendServerInfo 信号绑定匿名函数
         connect(rtmp_thread,&get_rtmp::sendServerInfo,this,[=](const QString& server,const QString& code){
             ui->server->setText(server);
             ui->code->setText(code);
+
+            if(server.isEmpty()&&code.isEmpty())
+            {
+                ui->outputOfRTMP->setText("获取失败，未发现任何 rtmp 网络请求，请点击开始获取，再打开直播软件");
+            }
+            else
+            {
+                ui->outputOfRTMP->setText("获取成功！");
+            }
 
             ui->btnOfRTMP->setText("开始获取");
             this->flagOfStop=0;
@@ -85,9 +104,11 @@ void MainWindow::init()
                 return;
             }
 
+            rtmp_thread->setTimeout(ui->timeOfRTMP->currentText().toInt());
             rtmp_thread->start();
 
             ui->btnOfRTMP->setText("停止获取");
+            ui->outputOfRTMP->setText("正在获取推流码...");
         }
         else if(ui->btnOfRTMP->text()=="停止获取")
         {
@@ -97,7 +118,6 @@ void MainWindow::init()
             }
 
             this->flagOfStop=1;
-
             ui->btnOfRTMP->setText("开始获取");
 
             QThread::sleep(1);

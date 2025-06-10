@@ -11,55 +11,96 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>推流码抓取小工具</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_4">
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>推流码</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>网卡选择</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>推流地址</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" rowspan="2">
+      <item row="1" column="0" rowspan="3">
        <widget class="QLabel" name="label_4">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>推流码获取</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2" colspan="2">
-       <widget class="QLineEdit" name="server"/>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>推流码</string>
+        </property>
+       </widget>
       </item>
-      <item row="2" column="2" colspan="2">
-       <widget class="QTextEdit" name="code"/>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>推流地址</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>输出</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>网卡选择</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QComboBox" name="optionsOfInterface"/>
       </item>
       <item row="0" column="3">
+       <widget class="QComboBox" name="timeOfRTMP"/>
+      </item>
+      <item row="3" column="2" colspan="3">
+       <widget class="QLabel" name="outputOfRTMP">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
        <widget class="QPushButton" name="btnOfRTMP">
         <property name="text">
          <string>开始获取</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QComboBox" name="optionsOfInterface"/>
+      <item row="1" column="2" colspan="3">
+       <widget class="QLineEdit" name="server"/>
+      </item>
+      <item row="2" column="2" colspan="3">
+       <widget class="QTextEdit" name="code"/>
       </item>
      </layout>
     </item>
