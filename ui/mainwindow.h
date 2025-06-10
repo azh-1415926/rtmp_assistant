@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "rtmp.h"
+#include "get_rtmp.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,6 +25,9 @@ private:
     rtmp* _rtmp;
     QList<QString> interface_names;
     QList<QString> interface_descriptions;
+    int flagOfStop;
+
+    get_rtmp* rtmp_thread;
 
     void init();
 };

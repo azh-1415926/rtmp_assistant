@@ -17,36 +17,12 @@
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_4">
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_4">
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>推流码获取</string>
+         <string>推流码</string>
         </property>
        </widget>
-      </item>
-      <item row="1" column="1">
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="code"/>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="server"/>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>推流地址</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>推流码</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_3">
@@ -55,7 +31,34 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="1" column="1">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>推流地址</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" rowspan="2">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>推流码获取</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" colspan="2">
+       <widget class="QLineEdit" name="server"/>
+      </item>
+      <item row="2" column="2" colspan="2">
+       <widget class="QTextEdit" name="code"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="btnOfRTMP">
+        <property name="text">
+         <string>开始获取</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
        <widget class="QComboBox" name="optionsOfInterface"/>
       </item>
      </layout>

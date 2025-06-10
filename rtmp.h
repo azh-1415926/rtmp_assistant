@@ -15,6 +15,8 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 
+#include <logger.hpp>
+
 // 配置结构体
 class Config
 {
@@ -45,7 +47,7 @@ class Config
 
             Config config;
             config.display_filter = data.value("display_filter", "tcp port 1935");
-            config.interface_name = data.value("_interface", "Realtek Gaming 2.5GbE Family Controller");
+            config.interface_name = data.value("interface", "Realtek Gaming 2.5GbE Family Controller");
             config.obs_path = data.value("obs_path", "");
             config.obs_config_path = data.value("obs_config_path", "");
 
@@ -64,7 +66,7 @@ std::string filter_strings(const std::string& input_str, const std::string& targ
 // 从RTMP数据包中提取信息
 void extract_rtmp_info(const u_char* packet, u_int length, std::string& server, std::string& code);
 // 从包中提取服务器地址和推流码
-void extract_server_and_code(pcap_t* handle, std::string& server, std::string& code);
+void extract_server_and_code(pcap_t* handle, std::string& server, std::string& code,int& flag,int timeout=30);
 // 修改OBS配置文件
 void modify_obs_config(const std::string& file_path, const std::string& server, const std::string& code);
 // 启动OBS
@@ -83,8 +85,9 @@ class rtmp
             interfaces_name=get_network_interfaces();
         }
 
-        bool getByInterface(const std::string& interface_name)
+        bool getByInterface(const std::string& interface_name,int& flag,int timeout)
         {
+            // azh::logger()<<"Start get RTMP timeout, flag:"<<flag<<",timeout:"<<timeout;
             // 打开网络接口
             char errbuf[PCAP_ERRBUF_SIZE];
             pcap_t *handle = pcap_open_live(interface_name.c_str(), 65536, 1, 1000, errbuf);
@@ -110,7 +113,7 @@ class rtmp
                 return false;
             }
 
-            extract_server_and_code(handle, server, code);
+            extract_server_and_code(handle, server, code,flag,timeout);
             pcap_close(handle);
 
             return true;

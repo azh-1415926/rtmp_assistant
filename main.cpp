@@ -43,7 +43,8 @@ int test_main()
 
     // 提取服务器地址和推流码
     std::string server, code;
-    extract_server_and_code(handle, server, code);
+    int flag=0;
+    extract_server_and_code(handle, server, code,flag);
     pcap_close(handle);
 
     if (!server.empty() && !code.empty())
@@ -76,8 +77,8 @@ int main()
     system("chcp 65001");
     
     rtmp r("config.json");
-
-    r.getByInterface("\\Device\\NPF_{FAE0ED12-DAE9-410F-9C41-A198DB8D1EF9}");
+    int flag=0;
+    r.getByInterface("\\Device\\NPF_{FAE0ED12-DAE9-410F-9C41-A198DB8D1EF9}",flag,30);
 
     Config config=r.getConfig();
     std::string server=r.getServer();

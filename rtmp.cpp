@@ -196,7 +196,7 @@ void extract_rtmp_info(const u_char *packet, u_int length, std::string &server, 
 }
 
 // 从包中提取服务器地址和推流码
-void extract_server_and_code(pcap_t *handle, std::string &server, std::string &code)
+void extract_server_and_code(pcap_t *handle, std::string &server, std::string &code,int& flag,int timeout)
 {
     struct pcap_pkthdr *header;
     const u_char *packet;
@@ -205,10 +205,10 @@ void extract_server_and_code(pcap_t *handle, std::string &server, std::string &c
 
     while ((res = pcap_next_ex(handle, &header, &packet)) >= 0)
     {
-        // 检查超时（30秒）
-        if (time(nullptr) - start_time > 30)
+        if ((time(nullptr) - start_time > timeout)||flag==1)
         {
-            std::cerr << "The packet capture timed out and no RTMP information was found." << std::endl;
+            // azh::logger()<<"Get RTMP timeout or user cancel, flag:"<<flag<<",timeout:"<<timeout;
+            std::cerr << "The packet capture timed out or user cancel." << std::endl;
             break;
         }
 

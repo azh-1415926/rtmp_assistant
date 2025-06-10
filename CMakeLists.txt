@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(douyin_rtmp_assistant VERSION 0.1.0 LANGUAGES C CXX)
+project(rtmp_assistant VERSION 0.1.0 LANGUAGES C CXX)
 
 # Specify MSVC UTF-8 encoding   
 # add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
@@ -15,7 +15,7 @@ add_library(get_rtmp rtmp.h rtmp.cpp)
 target_include_directories(get_rtmp PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(get_rtmp PUBLIC iphlpapi wpcap)
 
-add_executable(douyin_rtmp_assistant main.cpp)
-target_link_libraries(douyin_rtmp_assistant get_rtmp)
+add_executable(rtmp_assistant main.cpp)
+target_link_libraries(rtmp_assistant get_rtmp)
 
 add_subdirectory(ui)
