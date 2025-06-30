@@ -1,6 +1,9 @@
 # 抓取推流码小工具
 
-本软件基于C++ Qt开发界面，使用 wpcap 进行抓包，不依赖wireshark，无需安装其他软件，下载Release中的软件安装包，安装后可以直接使用，无需进行任何配置。
+本软件基于C++ Qt开发界面，使用 wpcap 进行抓包，不依赖 wireshark，但是需要安装npcap，[链接地址](https://npcap.com/#download),安装 Npcap installer 即可，然后下载项目中 Release 里的软件安装包，安装后可以直接使用，无需进行任何配置。
+
+**依赖**
+* Npcap
 
 **使用说明**
 

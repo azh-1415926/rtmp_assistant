@@ -53,7 +53,7 @@ void MainWindow::init()
     }
 
     // 用户选择网卡，则将当前网卡信息传入 get_rtmp 子线程
-    connect(ui->optionsOfInterface,&QComboBox::currentIndexChanged,this,[=](int i){
+    connect(ui->optionsOfInterface,QOverload<int>::of(&QComboBox::currentIndexChanged),this,[=](int i){
         std::string interface_name=i<interface_names.size()?interface_names.at(i).toStdString():"";
 
         if(interface_name.empty())
