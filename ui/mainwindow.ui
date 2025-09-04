@@ -17,6 +17,22 @@
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_4">
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>推流码</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" colspan="3">
+       <widget class="QLineEdit" name="server"/>
+      </item>
       <item row="1" column="0" rowspan="3">
        <widget class="QLabel" name="label_4">
         <property name="maximumSize">
@@ -30,16 +46,13 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_2">
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>16777215</height>
-         </size>
-        </property>
+      <item row="2" column="2" colspan="3">
+       <widget class="QTextEdit" name="code"/>
+      </item>
+      <item row="3" column="2" colspan="3">
+       <widget class="QLabel" name="outputOfRTMP">
         <property name="text">
-         <string>推流码</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -56,12 +69,8 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>输出</string>
-        </property>
-       </widget>
+      <item row="0" column="1" colspan="2">
+       <widget class="QComboBox" name="optionsOfInterface"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_3">
@@ -76,19 +85,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QComboBox" name="optionsOfInterface"/>
-      </item>
-      <item row="0" column="3">
-       <widget class="QComboBox" name="timeOfRTMP"/>
-      </item>
-      <item row="3" column="2" colspan="3">
-       <widget class="QLabel" name="outputOfRTMP">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="4">
        <widget class="QPushButton" name="btnOfRTMP">
         <property name="text">
@@ -96,11 +92,50 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2" colspan="3">
-       <widget class="QLineEdit" name="server"/>
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>输出</string>
+        </property>
+       </widget>
       </item>
-      <item row="2" column="2" colspan="3">
-       <widget class="QTextEdit" name="code"/>
+      <item row="0" column="3">
+       <widget class="QComboBox" name="timeOfRTMP"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>导出到OBS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
+       <widget class="QPushButton" name="btnOfExport">
+        <property name="text">
+         <string>导出</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="pathOfSettingDir">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>配置路径</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="outputOfExport">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -112,7 +147,7 @@
      <x>0</x>
      <y>0</y>
      <width>450</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

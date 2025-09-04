@@ -34,6 +34,10 @@
 6. 若为以太网，同理，查看以太网的网卡描述
 !["LAN网卡描述"](https://github.com/azh-1415926/rtmp_assistant/blob/main/doc/png/lan.png)
 
+v0.1.1
+1. 增加导出功能，将自动获取当前用户的家目录，导出抓包信息到 `C:\Users\用户名\AppData\Roaming\obs-studio\basic\profiles\rtmp_assistant` 路径下，不存在将拷贝 `C:\Users\用户名\AppData\Roaming\obs-studio\basic\profiles\默认` 文件夹，将抓包的 `server` 和 `key` 信息填入 `service.json` 中
+2. 可以抓包获取，也可以手动输入推流地址和推流码到输入框，点击导出按钮，导出配置文件，将会读取注册表中 `OBS` 的安装路径，将自动启动 `OBS`
+
 我的例子中，选择了有线网卡
 
 参考了 https://github.com/LFMJUN/douyin_rtmp.git
